@@ -33,7 +33,7 @@ public class VisionCommand extends CommandBase {
 
         turningController = new PIDController(VISION_P, VISION_I, VISION_D);
         // f(error) => output
-        // f(error) = kP * error (-15 to 15)
+        // f(error) = kP * error
         // output (-1 to 1)
         // (-0.5 to 0.5)
     }

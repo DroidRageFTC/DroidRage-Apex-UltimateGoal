@@ -50,10 +50,12 @@ public class RightRedFourAltCommand extends SequentialCommandGroup {
                 new InstantCommand(wobbleGoalArm::setTurretFarRight,wobbleGoalArm),
                 new WaitCommand(500),
                 new PlaceWobbleGoal(wobbleGoalArm),
+
                 new WaitCommand(500),
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::liftWobbleGoal, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::setTurretMiddle, wobbleGoalArm),
+
                 new DriveForwardCommand(drivetrain, 30),
                 // Drive to Rings
                 new InstantCommand(intake::autodropIntake, intake),

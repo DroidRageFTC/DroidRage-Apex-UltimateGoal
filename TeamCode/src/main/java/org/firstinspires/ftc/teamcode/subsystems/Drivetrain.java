@@ -50,7 +50,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void tankDrive(double leftY, double rightY) {
-        drive.setMotorPowers(leftY, -rightY);
+        drive.setMotorPowers(leftY, rightY);
     }
 
     public void arcadeDrive(double forward, double rotate) {

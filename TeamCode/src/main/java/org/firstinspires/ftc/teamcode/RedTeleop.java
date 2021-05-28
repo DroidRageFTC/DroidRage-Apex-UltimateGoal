@@ -16,7 +16,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+import org.firstinspires.ftc.teamcode.commands.drive.ArcadeDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.DefaultDriveCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.SlowArcadeDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SlowDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.VisionCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
@@ -33,7 +35,6 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 @TeleOp(name = "Red TeleOp")
 public class RedTeleop extends MatchOpMode {
     // Motors
-    private MotorEx leftBackDriveMotor, rightBackDriveMotor, leftFrontDriveMotor, rightFrontDriveMotor;
     private MotorEx intakeMotor;
     private DcMotorEx shooterMotorFront, shooterMotorBack;
     private MotorEx arm;
@@ -58,7 +59,7 @@ public class RedTeleop extends MatchOpMode {
     private Button autoPowershotButton;
     private Button increaseSpeedButton;
     Vision vision;
-    // Thomas is a dumdum
+
     @Override
     public void robotInit() {
         //Drivetrain Hardware Initializations
@@ -96,7 +97,7 @@ public class RedTeleop extends MatchOpMode {
     @Override
     public void configureButtons() {
 
-        slowModeTrigger = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)).whileHeld(new SlowDriveCommand(drivetrain, driverGamepad));
+        slowModeTrigger = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)).whileHeld(new SlowArcadeDriveCommand(drivetrain, driverGamepad));
 
         singleFeedButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.Y)).whenPressed(new FeedRingsCommand(feeder, 1));
         // TRIPLE SHOT SPEED *********************
@@ -105,9 +106,11 @@ public class RedTeleop extends MatchOpMode {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(ShooterWheels.TARGET_SPEED), shooterWheels),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels));
         (new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_STICK_BUTTON)).whileHeld(new VisionCommand(drivetrain, vision, 30));
+
         powershotButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.B)).toggleWhenPressed(
                 new InstantCommand(() -> shooterWheels.setShooterRPM(3000), shooterWheels),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels));
+
         intakeButton = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)).whileHeld(intake::intake).whenReleased(intake::stop);
         outtakeButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.X)).whileHeld(intake::outtake).whenReleased(intake::stop);
 
@@ -119,15 +122,15 @@ public class RedTeleop extends MatchOpMode {
         liftArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftWobbleGoal);
         lowerArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::placeWobbleGoal);
 
-
         (new GamepadButton(driverGamepad, GamepadKeys.Button.BACK)).whenPressed(() -> shooterWheels.adjustShooterRPM(75));
         (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_LEFT)).whenPressed(() -> shooterWheels.adjustShooterRPM(-75));
         lowMidWobbleButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_RIGHT)).whenPressed(() -> wobbleGoalArm.setWobbleGoal(-65));
         (new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)).toggleWhenPressed(new InstantCommand(intake::dropIntake, intake), new InstantCommand(intake::liftIntake, intake));
-        drivetrain.setDefaultCommand(new DefaultDriveCommand(drivetrain, driverGamepad));
+
         (new GamepadButton(operatorGamepad, GamepadKeys.Button.Y)).whenPressed(wobbleGoalArm::liftArmManual).whenReleased(wobbleGoalArm::stopArm);
         (new GamepadButton(operatorGamepad, GamepadKeys.Button.X)).whenPressed(wobbleGoalArm::lowerArmManual).whenReleased(wobbleGoalArm::stopArm);
 
+        drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driverGamepad));
     }
 
 
