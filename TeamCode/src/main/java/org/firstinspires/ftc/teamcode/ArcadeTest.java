@@ -8,17 +8,15 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.commands.drive.ArcadeDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SlowArcadeDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.drive.SlowDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
@@ -27,16 +25,17 @@ import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
-
+@Disabled
 @Config
 @TeleOp(name = "Arcade TeleOp")
 public class ArcadeTest extends MatchOpMode {
     // Motors
     private MotorEx leftBackDriveMotor, rightBackDriveMotor, leftFrontDriveMotor, rightFrontDriveMotor;
     private MotorEx intakeMotor;
+    private MotorEx bintakeMotor;
     private DcMotorEx shooterMotorFront, shooterMotorBack;
-    private MotorEx arm;
-    private ServoEx feedServo, clawServo, lazySusanServo, intakeServo;
+    private ServoEx arm;
+    private ServoEx feedServo;
     private TouchSensor wobbleTouchSensor;
     // Gamepad
     private GamepadEx driverGamepad, operatorGamepad;
@@ -61,28 +60,24 @@ public class ArcadeTest extends MatchOpMode {
         //Drivetrain Hardware Initializations
         // Intake hardware Initializations
         intakeMotor = new MotorEx(hardwareMap, "intake");
+        bintakeMotor = new MotorEx(hardwareMap, "bintake");
 
         // Shooter hardware initializations
         shooterMotorBack = (DcMotorEx) hardwareMap.get(DcMotor.class, "shooter_back");
         shooterMotorFront = (DcMotorEx) hardwareMap.get(DcMotor.class, "shooter_front");
-        intakeServo = new SimpleServo(hardwareMap, "intake_wall_servo", 0, 180);
+        //intakeServo = new SimpleServo(hardwareMap, "intake_wall_servo", 0, 180);
 
         feedServo = new SimpleServo(hardwareMap, "feed_servo", 0, 230);
 
         // Wobble Harware initializations
-        arm = new MotorEx(hardwareMap, "arm", Motor.GoBILDA.RPM_60);
-        clawServo = new SimpleServo(hardwareMap, "claw_servo", 0, 230);
-        lazySusanServo = new SimpleServo(hardwareMap, "lazy_susan", 0, 360);
-
-        wobbleTouchSensor = hardwareMap.get(TouchSensor.class, "Touch");
 
         // Subsystems
         drivetrain = new Drivetrain(new SampleTankDrive(hardwareMap),telemetry);
         drivetrain.init();
-        intake = new Intake(intakeMotor, intakeServo, telemetry);
+        intake = new Intake(intakeMotor, bintakeMotor, telemetry);
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
-        wobbleGoalArm = new WobbleGoalArm(arm, lazySusanServo, clawServo, wobbleTouchSensor, telemetry);
+        wobbleGoalArm = new WobbleGoalArm(hardwareMap, telemetry);
 
         gamepad1.setJoystickDeadzone(0.0f);
         driverGamepad = new GamepadEx(gamepad1);
@@ -112,26 +107,21 @@ public class ArcadeTest extends MatchOpMode {
                 new InstantCommand(wobbleGoalArm::closeClaw, wobbleGoalArm)
         );
 
-        liftArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftWobbleGoal);
-        lowerArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::placeWobbleGoal);
+        liftArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftArm);
+        lowerArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::lowerArm);
 
 
         (new GamepadButton(driverGamepad, GamepadKeys.Button.BACK)).whenPressed(() -> shooterWheels.adjustShooterRPM(200));
 
-        lowMidWobbleButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_RIGHT)).whenPressed(() -> wobbleGoalArm.setWobbleGoal(-65));
-        (new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)).toggleWhenPressed(new InstantCommand(intake::dropIntake, intake), new InstantCommand(intake::liftIntake, intake));
         drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driverGamepad));
-        (new GamepadButton(operatorGamepad, GamepadKeys.Button.Y)).whenPressed(wobbleGoalArm::liftArmManual).whenReleased(wobbleGoalArm::stopArm);
-        (new GamepadButton(operatorGamepad, GamepadKeys.Button.X)).whenPressed(wobbleGoalArm::lowerArmManual).whenReleased(wobbleGoalArm::stopArm);
+
 
     }
 
 
     @Override
     public void matchStart() {
-        intake.liftIntake();
         schedule(new InstantCommand(feeder::retractFeed));
-        schedule(new InstantCommand(() -> wobbleGoalArm.setTurretMiddle()));
     }
 
     @Override

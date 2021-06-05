@@ -200,5 +200,3 @@ public class UGBasicHighGoalPipeline extends OpenCvPipeline {
         return xOffset;
     }
 }
-
-

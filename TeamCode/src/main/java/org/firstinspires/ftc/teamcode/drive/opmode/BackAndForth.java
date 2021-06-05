@@ -3,11 +3,17 @@ package org.firstinspires.ftc.teamcode.drive.opmode;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.arcrobotics.ftclib.command.ParallelCommandGroup;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.commands.RunCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.TrajectoryFollowerCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
+import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 
 /*
@@ -28,28 +34,40 @@ import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
-public class BackAndForth extends LinearOpMode {
+public class BackAndForth extends MatchOpMode {
 
     public static double DISTANCE = 50;
+    Drivetrain drive;
+
+    Trajectory trajectoryForward;
+    Trajectory trajectoryBackward;
 
     @Override
-    public void runOpMode() throws InterruptedException {
-        SampleTankDrive drive = new SampleTankDrive(hardwareMap);
-
-        Trajectory trajectoryForward = drive.trajectoryBuilder(new Pose2d())
+    public void robotInit() {
+        drive = new Drivetrain(new SampleTankDrive(hardwareMap), telemetry);
+        trajectoryForward = drive.trajectoryBuilder(new Pose2d())
                 .forward(DISTANCE)
                 .build();
-
-        Trajectory trajectoryBackward = drive.trajectoryBuilder(trajectoryForward.end())
+        trajectoryBackward = drive.trajectoryBuilder(trajectoryForward.end())
                 .back(DISTANCE)
                 .build();
-
-        waitForStart();
-
-        while (opModeIsActive() && !isStopRequested()) {
-            drive.followTrajectory(trajectoryForward);
-            drive.followTrajectory(trajectoryBackward);
-        }
     }
+
+    @Override
+    public void matchStart() {
+        TrajectoryFollowerCommand forwardFollower = new TrajectoryFollowerCommand(drive, trajectoryForward);
+        TrajectoryFollowerCommand  backwardFollower = new TrajectoryFollowerCommand(drive,
+                drive.trajectoryBuilder(trajectoryForward.end())
+                        .back(DISTANCE)
+                        .build()
+        );
+        SequentialCommandGroup backAndForthCommand = new SequentialCommandGroup(forwardFollower, backwardFollower);
+        schedule(new RunCommand(() -> {
+            if (backAndForthCommand.isFinished() || !backAndForthCommand.isScheduled()) {
+                backAndForthCommand.schedule();
+            }
+        }));
+    }
+
+
 }

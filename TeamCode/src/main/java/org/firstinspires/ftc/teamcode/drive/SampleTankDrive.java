@@ -69,16 +69,20 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 @Config
 public class
 SampleTankDrive extends TankDrive {
-    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(12, 0, 0);
-    public static PIDCoefficients CROSS_TRACK_PID = new PIDCoefficients(0.00012, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(14, 0, 0.01);
+    public static PIDCoefficients AXIAL_PID = new PIDCoefficients(4.5, 0, 0);
+    public static PIDCoefficients CROSS_TRACK_PID = new PIDCoefficients(0.0002, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(5, 0, 0.01);
     public static PIDCoefficients LEFT_DRIVE_PID =new PIDCoefficients(0.01, 0, 0);
-    public static PIDCoefficients RIGHT_DRIVE_PID =new PIDCoefficients(0.01, 0, 0);
+    public static PIDCoefficients RIGHT_DRIVE_PID =new PIDCoefficients(0.04, 0, 0);
+    /*public static PIDCoefficients AXIAL_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients CROSS_TRACK_PID = new PIDCoefficients(0.0, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(28, 0, 0);*/
+
     private PIDController leftDriveVeloPID;
     private PIDController rightDriveVeloPID;
 
     public static double VX_WEIGHT = 1;
-    public static double OMEGA_WEIGHT = 1;
+    public static double OMEGA_WEIGHT = 2;
 
     public enum Mode {
         IDLE,
@@ -152,9 +156,9 @@ SampleTankDrive extends TankDrive {
         DcMotorEx rightRear = hardwareMap.get(DcMotorEx.class, "rear_drive_right");
         DcMotorEx rightFront = hardwareMap.get(DcMotorEx.class, "front_drive_right");
 
-        rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
 
 

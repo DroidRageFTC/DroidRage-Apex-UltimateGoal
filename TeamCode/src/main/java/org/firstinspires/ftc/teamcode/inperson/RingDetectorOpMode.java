@@ -34,7 +34,7 @@ public class RingDetectorOpMode extends MatchOpMode {
         driverGamepad = new GamepadEx(gamepad1);
         //This will instantiate an OpenCvCamera object for the camera we'll be using
 
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, topHeight, bottomHeight, width, UGBasicHighGoalPipeline.Mode.BLUE_ONLY);
+        vision = new Vision(hardwareMap, telemetry, topHeight, bottomHeight, width);
 
     }
 

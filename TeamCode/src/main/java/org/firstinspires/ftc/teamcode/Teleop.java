@@ -2,14 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.WaitCommand;
 import com.arcrobotics.ftclib.command.button.Button;
 import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,28 +15,24 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.commands.drive.ArcadeDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.drive.DefaultDriveCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SlowArcadeDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.drive.SlowDriveCommand;
-import org.firstinspires.ftc.teamcode.commands.drive.VisionCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
-import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
-import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 @Config
-@TeleOp(name = "Red TeleOp")
-public class RedTeleop extends MatchOpMode {
+@TeleOp(name = "TeleOp")
+public class Teleop extends MatchOpMode {
     // Motors
+    private MotorEx leftBackDriveMotor, rightBackDriveMotor, leftFrontDriveMotor, rightFrontDriveMotor;
     private MotorEx intakeMotor;
+    private MotorEx backIntakeMotor;
     private DcMotorEx shooterMotorFront, shooterMotorBack;
-    private MotorEx arm;
-    private ServoEx feedServo, clawServo, lazySusanServo, intakeServo;
+    private ServoEx feedServo;
     private TouchSensor wobbleTouchSensor;
     // Gamepad
     private GamepadEx driverGamepad, operatorGamepad;
@@ -49,45 +43,42 @@ public class RedTeleop extends MatchOpMode {
     private ShooterFeeder feeder;
     private Intake intake;
     private WobbleGoalArm wobbleGoalArm;
-    public static double middle_pos = 0.543;
-    public static double right_pos = 0.97;
-    public static double left_pos = .122;
+
 
     private Button intakeButton, outtakeButton;
     private Button slowModeTrigger, tripleFeedButton, singleFeedButton, shootButton, powershotButton, toggleClawButton, liftArmButton, lowerArmButton;
     private Button lowMidWobbleButton;
     private Button autoPowershotButton;
     private Button increaseSpeedButton;
-    Vision vision;
 
+    public Teleop() {
+    }
+
+    // Thomas is a dumdum
     @Override
     public void robotInit() {
         //Drivetrain Hardware Initializations
         // Intake hardware Initializations
         intakeMotor = new MotorEx(hardwareMap, "intake");
+        backIntakeMotor = new MotorEx(hardwareMap, "bintake");
 
         // Shooter hardware initializations
         shooterMotorBack = (DcMotorEx) hardwareMap.get(DcMotor.class, "shooter_back");
         shooterMotorFront = (DcMotorEx) hardwareMap.get(DcMotor.class, "shooter_front");
-        intakeServo = new SimpleServo(hardwareMap, "intake_wall_servo", 0, 180);
+        //intakeServo = new SimpleServo(hardwareMap, "intake_wall_servo", 0, 180);
 
         feedServo = new SimpleServo(hardwareMap, "feed_servo", 0, 230);
 
-        // Wobble Harware initializations
-        arm = new MotorEx(hardwareMap, "arm", Motor.GoBILDA.RPM_60);
-        clawServo = new SimpleServo(hardwareMap, "claw_servo", 0, 230);
-        lazySusanServo = new SimpleServo(hardwareMap, "lazy_susan", 0, 360);
 
         wobbleTouchSensor = hardwareMap.get(TouchSensor.class, "Touch");
 
         // Subsystems
         drivetrain = new Drivetrain(new SampleTankDrive(hardwareMap),telemetry);
         drivetrain.init();
-        intake = new Intake(intakeMotor, intakeServo, telemetry);
+        intake = new Intake(intakeMotor, backIntakeMotor, telemetry);
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
-        wobbleGoalArm = new WobbleGoalArm(arm, lazySusanServo, clawServo, wobbleTouchSensor, telemetry);
-        vision = new Vision(hardwareMap, "webcam", "webcam1", telemetry, 0.43, 0.56, 0.5, UGBasicHighGoalPipeline.Mode.RED_ONLY, false);
+        wobbleGoalArm = new WobbleGoalArm(hardwareMap, telemetry);
 
         gamepad1.setJoystickDeadzone(0.0f);
         driverGamepad = new GamepadEx(gamepad1);
@@ -97,68 +88,67 @@ public class RedTeleop extends MatchOpMode {
     @Override
     public void configureButtons() {
 
-        slowModeTrigger = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)).whileHeld(new SlowArcadeDriveCommand(drivetrain, driverGamepad));
+        slowModeTrigger = (new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_BUMPER)).whileHeld(new SlowArcadeDriveCommand(drivetrain, driverGamepad));
 
-        singleFeedButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.Y)).whenPressed(new FeedRingsCommand(feeder, 1));
+        singleFeedButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.A)).whenPressed(new FeedRingsCommand(feeder, 1));
         // TRIPLE SHOT SPEED *********************
-        tripleFeedButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_BUMPER)).whenPressed(new FeedRingsCommand(feeder, 4,30));
-        shootButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_BUMPER)).toggleWhenPressed(
+        tripleFeedButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.LEFT_BUMPER)).whenPressed(new FeedRingsCommand(feeder, 5, 50));
+        shootButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.RIGHT_BUMPER)).toggleWhenPressed(
                 new InstantCommand(() -> shooterWheels.setShooterRPM(ShooterWheels.TARGET_SPEED), shooterWheels),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels));
-        (new GamepadButton(driverGamepad, GamepadKeys.Button.LEFT_STICK_BUTTON)).whileHeld(new VisionCommand(drivetrain, vision, 30));
-
-        powershotButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.B)).toggleWhenPressed(
+        powershotButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.Y)).toggleWhenPressed(
                 new InstantCommand(() -> shooterWheels.setShooterRPM(3000), shooterWheels),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels));
-
         intakeButton = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)).whileHeld(intake::intake).whenReleased(intake::stop);
-        outtakeButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.X)).whileHeld(intake::outtake).whenReleased(intake::stop);
+        (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.LEFT_TRIGGER)).whileHeld(new InstantCommand(intake::intake, intake)).whenReleased(intake::stop);
 
-        toggleClawButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.A)).toggleWhenPressed(
+        outtakeButton = (new GamepadTrigger(driverGamepad, GamepadKeys.Trigger.RIGHT_TRIGGER)).whileHeld(intake::outtake).whenReleased(intake::stop);
+
+        toggleClawButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_LEFT)).toggleWhenPressed(
                 new InstantCommand(wobbleGoalArm::openClaw, wobbleGoalArm),
                 new InstantCommand(wobbleGoalArm::closeClaw, wobbleGoalArm)
         );
 
-        liftArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftWobbleGoal);
-        lowerArmButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::placeWobbleGoal);
+        liftArmButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftArm);
+        lowerArmButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::lowerArm);
 
-        (new GamepadButton(driverGamepad, GamepadKeys.Button.BACK)).whenPressed(() -> shooterWheels.adjustShooterRPM(75));
-        (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_LEFT)).whenPressed(() -> shooterWheels.adjustShooterRPM(-75));
-        lowMidWobbleButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.DPAD_RIGHT)).whenPressed(() -> wobbleGoalArm.setWobbleGoal(-65));
-        (new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)).toggleWhenPressed(new InstantCommand(intake::dropIntake, intake), new InstantCommand(intake::liftIntake, intake));
 
-        (new GamepadButton(operatorGamepad, GamepadKeys.Button.Y)).whenPressed(wobbleGoalArm::liftArmManual).whenReleased(wobbleGoalArm::stopArm);
-        (new GamepadButton(operatorGamepad, GamepadKeys.Button.X)).whenPressed(wobbleGoalArm::lowerArmManual).whenReleased(wobbleGoalArm::stopArm);
-
+        (new GamepadButton(operatorGamepad, GamepadKeys.Button.B)).whenPressed(() -> shooterWheels.adjustShooterRPM(75));
+        (new GamepadButton(operatorGamepad, GamepadKeys.Button.X)).whenPressed(() -> shooterWheels.adjustShooterRPM(-75));
+        //(new GamepadButton(driverGamepad, GamepadKeys.Button.RIGHT_STICK_BUTTON)).toggleWhenPressed(new InstantCommand(intake::dropIntake, intake), new InstantCommand(intake::liftIntake, intake));
         drivetrain.setDefaultCommand(new ArcadeDriveCommand(drivetrain, driverGamepad));
     }
 
 
     @Override
     public void matchStart() {
-        intake.liftIntake();
         schedule(new InstantCommand(feeder::retractFeed));
-        schedule(new InstantCommand(() -> wobbleGoalArm.setTurretMiddle()));
     }
 
     @Override
     public void robotPeriodic() {
     }
 }
+/*
+Slow mode = driver right bumper
+single shot = driver A
+vision = driver left stick button
+power shot = driver Y
+intake = driver left trigger
+outake = driver right trigger
 
-// Left Trigger - Intake. Condition: WhenHeld
-// X - Outtake. Condition WhenHeld
 
-// Right Bumper - Start shooter. Condition: When Toggled
-// Left Bumper - Triple Feed. Condition: When Pressed
-// Y - Single Feed. Condition: When Pressed
 
-// DPAD Up: Wobble arm up
-// DPAD Down: Wobble arm down
-// A - Toggle wobble goal:
+Tripple shot = Operator Left Bumper
+rev shooter = operator right bumper
+toggle open/close claw = operator dpad left
+lift claw = dpad up
+lower claw = dpad down
+raise shooter speed = operator B
+lower shooter speed = operator X
 
-// Right Trigger - Slow Mode. Condition: When Held
 
+*/
 
 
 

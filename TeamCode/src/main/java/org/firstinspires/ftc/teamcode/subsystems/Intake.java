@@ -1,11 +1,8 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.command.SubsystemBase;
-import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Util;
@@ -19,10 +16,12 @@ public class Intake extends SubsystemBase {
 
     Telemetry telemetry;
     private MotorEx intake;
-    private ServoEx servo;
-    public Intake(MotorEx intake, ServoEx servo, Telemetry tl) {
+    private MotorEx bintake;
+    public Intake(MotorEx intake, MotorEx bintake, Telemetry tl) {
         this.intake = intake;
-        this.servo = servo;
+        this.bintake = bintake;
+        intake.setInverted(true);
+        bintake.setInverted(true);
         this.telemetry = tl;
     }
 
@@ -33,20 +32,13 @@ public class Intake extends SubsystemBase {
 
     public void set(double speed) {
         intake.set(speed);
-    }
-    public void dropIntake() {
-        servo.setPosition(0.58);
-    }
-    public void autodropIntake() {
-        servo.setPosition(0.38);
+        bintake.set(speed);
     }
 
-    public void liftIntake() {
-        servo.setPosition(0.8);
-    }
     public void intake() {
         set(INTAKE_SPEED);
     }
+
 
     public void outtake() {
         set(OUTAKE_SPEED);
@@ -54,5 +46,6 @@ public class Intake extends SubsystemBase {
 
     public void stop() {
         intake.stopMotor();
+        bintake.stopMotor();
     }
 }

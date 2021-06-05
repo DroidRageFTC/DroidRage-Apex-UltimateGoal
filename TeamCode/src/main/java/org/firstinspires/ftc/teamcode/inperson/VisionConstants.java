@@ -5,16 +5,16 @@ import com.acmerobotics.dashboard.config.Config;
 public class VisionConstants {
     @Config
     public static class RED_LEFT_VISION {
-        public static double WIDTH = 0.97;
-        public static double BOTTOM_HEIGHT = 0.51;
-        public static double TOP_HEIGHT = 0.37;
+        public static double WIDTH = 0.98;
+        public static double BOTTOM_HEIGHT = 0.86;
+        public static double TOP_HEIGHT = 0.72;
     }
 
     @Config
     public static class RED_RIGHT_VISION {
-        public static double WIDTH = 0.02;
-        public static double BOTTOM_HEIGHT = 0.59;
-        public static double TOP_HEIGHT = 0.45;
+        public static double WIDTH = 0.0099;
+        public static double BOTTOM_HEIGHT = 0.85;
+        public static double TOP_HEIGHT = 0.72;
     }
 
     @Config
