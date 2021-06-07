@@ -15,8 +15,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class RightRedZeroCommand extends SequentialCommandGroup {
-    public RightRedZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+public class RedRightZeroCommand extends SequentialCommandGroup {
+    public RedRightZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3800;
         final int POWERSHOT_SPEED = 3000;
 

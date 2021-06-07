@@ -96,13 +96,13 @@ public class RedRight extends MatchOpMode {
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
-                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
-                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
-                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                 }}, vision::getCurrentStack).andThen(new InstantCommand(() -> stop()))
         );

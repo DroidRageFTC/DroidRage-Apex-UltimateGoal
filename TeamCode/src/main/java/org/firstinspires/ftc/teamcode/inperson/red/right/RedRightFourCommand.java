@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.left;
+package org.firstinspires.ftc.teamcode.inperson.red.right;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -15,23 +15,24 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class LeftRedOneCommand extends SequentialCommandGroup {
-    public LeftRedOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
-        final int HG_SPEED = 3600;
+public class RedRightFourCommand extends SequentialCommandGroup {
+    public RedRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+        final int HG_SPEED = 3800;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-                new RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
+                new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -35),
-                new TurnToCommand(drivetrain, -90, true),
-                new DriveForwardCommand(drivetrain, -10),
+                new DriveForwardCommand(drivetrain, -45),
+                new TurnToCommand(drivetrain, -225),
+                new DriveForwardCommand(drivetrain, 10),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, 20)
+                new TurnCommand(drivetrain, 45),
+                new DriveForwardCommand(drivetrain, -40)
+
                 );
     }
 }
-    //new SplineCommand(drivetrain, new Vector2d(-42, 12), Math.toRadians(180)),
+    //new SplineCommand(drivetrain, new Vector2d(-30, 24), Math.toRadians(15), false)
     //new DriveForwardCommand(drivetrain, -40),
-    //new SplineCommand(drivetrain, new Vector2d(-30, 24), Math.toRadians(15), false),
+    //
