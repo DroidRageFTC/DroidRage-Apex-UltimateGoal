@@ -22,7 +22,7 @@ public class RedLeftFourCommand extends SequentialCommandGroup {
         addCommands(
                 new org.firstinspires.ftc.teamcode.auton.red.left.RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -43),
+                new DriveForwardCommand(drivetrain, -45),
                 new TurnToCommand(drivetrain, -90, true),
                 new DriveForwardCommand(drivetrain, 10),
                 new PlaceWobbleGoal(wobbleGoalArm),

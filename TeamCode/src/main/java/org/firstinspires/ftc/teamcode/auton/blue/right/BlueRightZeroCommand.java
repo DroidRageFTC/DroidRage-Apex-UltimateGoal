@@ -28,7 +28,7 @@ public class BlueRightZeroCommand extends SequentialCommandGroup {
                 //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, -15),
                 new TurnCommand(drivetrain,90),
-                new DriveForwardCommand(drivetrain, -5),
+                new DriveForwardCommand(drivetrain, 5),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, -3)
                 );

@@ -22,7 +22,7 @@ public class BlueRightOneCommand extends SequentialCommandGroup {
                 new org.firstinspires.ftc.teamcode.auton.blue.right.BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, -35),
-                new TurnToCommand(drivetrain, -90, true),
+                new TurnToCommand(drivetrain, 90, true),
                 new DriveForwardCommand(drivetrain, -10),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new TurnToCommand(drivetrain, 0, true),
