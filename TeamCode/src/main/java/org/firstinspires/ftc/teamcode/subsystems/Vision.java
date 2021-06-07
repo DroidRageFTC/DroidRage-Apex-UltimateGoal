@@ -39,14 +39,14 @@ public class Vision extends SubsystemBase {
         ringPipeline = new RingPipelineEx();
         ringPipeline.setBottomRectangle(width, bottom);
         ringPipeline.setTopRectangle(width, top);
-        ringPipeline.setRectangleSize(5, 5);
+        ringPipeline.setRectangleSize(15, 15);
 
         ringCamera.setPipeline(ringPipeline);
 
         ringCamera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                ringCamera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+                ringCamera.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
             }
 
         });

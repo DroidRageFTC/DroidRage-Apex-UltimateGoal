@@ -1,26 +1,21 @@
-package org.firstinspires.ftc.teamcode.inperson.red.spicy;
+package org.firstinspires.ftc.teamcode.inperson.red.right;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.InstantCommand;
-import com.arcrobotics.ftclib.command.ParallelCommandGroup;
 import com.arcrobotics.ftclib.command.SelectCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
-import org.firstinspires.ftc.teamcode.pipelines.UGBasicHighGoalPipeline;
 import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
-import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
@@ -31,10 +26,9 @@ import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
-import java.util.logging.Level;
 
-@Autonomous(name = "Red Outside", group = "Red")
-public class RedOutside extends MatchOpMode {
+@Autonomous(name = "Red Right", group = "Red")
+public class RedRight extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 0;
@@ -101,14 +95,16 @@ public class RedOutside extends MatchOpMode {
         wobbleGoalArm.closeClaw();
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
-                    put(RingPipelineEx.Stack.FOUR, new InstantCommand());
+                    put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
+                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                    ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
-                            new RightRedOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
-                            new RightRedZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new org.firstinspires.ftc.teamcode.inperson.red.right.RightRedZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
-                }}, vision::getCurrentStack)
+                }}, vision::getCurrentStack).andThen(new InstantCommand(() -> stop()))
         );
 
     }
