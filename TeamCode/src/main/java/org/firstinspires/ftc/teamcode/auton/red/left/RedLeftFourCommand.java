@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.right;
+package org.firstinspires.ftc.teamcode.auton.red.left;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -7,7 +7,6 @@ import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
-import org.firstinspires.ftc.teamcode.inperson.red.left.RedLeftShootingSequence;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
@@ -15,13 +14,13 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class RedRightFourCommand extends SequentialCommandGroup {
-    public RedRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
-        final int HG_SPEED = 3800;
+public class RedLeftFourCommand extends SequentialCommandGroup {
+    public RedLeftFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+        final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-                new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
+                new org.firstinspires.ftc.teamcode.auton.red.left.RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, -45),
                 new TurnToCommand(drivetrain, -225),

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.red.right;
+package org.firstinspires.ftc.teamcode.auton.red.right;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -7,7 +7,6 @@ import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
-import org.firstinspires.ftc.teamcode.inperson.red.left.RedLeftShootingSequence;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;

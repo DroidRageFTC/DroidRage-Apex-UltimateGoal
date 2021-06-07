@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.right;
+package org.firstinspires.ftc.teamcode.auton.blue.left;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -13,15 +13,15 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-public class BlueRightZeroCommand extends SequentialCommandGroup {
-    public BlueRightZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+public class BlueLeftZeroCommand extends SequentialCommandGroup {
+    public BlueLeftZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 360;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
                 
                 
-                new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
+                new BlueLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
                 //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, -50),

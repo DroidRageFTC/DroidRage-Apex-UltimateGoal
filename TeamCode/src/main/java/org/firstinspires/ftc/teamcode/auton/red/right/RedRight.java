@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.left;
+package org.firstinspires.ftc.teamcode.auton.red.right;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
@@ -14,10 +14,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
-import org.firstinspires.ftc.teamcode.inperson.VisionConstants;
-import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
+import org.firstinspires.ftc.teamcode.auton.VisionConstants;
 import org.firstinspires.ftc.teamcode.pipelines.RingPipelineEx;
+import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
+import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
@@ -27,8 +27,8 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
 
-@Autonomous(name = "Red Left", group = "Red")
-public class BlueLeft extends MatchOpMode {
+@Autonomous(name = "Red Right Autonomous", group = "Red")
+public class RedRight extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
     public static double startPoseHeading = 0;
@@ -79,7 +79,7 @@ public class BlueLeft extends MatchOpMode {
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(hardwareMap, telemetry);
-        vision = new Vision(hardwareMap, telemetry, VisionConstants.RED_LEFT_VISION.TOP_HEIGHT, VisionConstants.RED_LEFT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_LEFT_VISION.WIDTH);
+        vision = new Vision(hardwareMap, telemetry, VisionConstants.RED_RIGHT_VISION.TOP_HEIGHT, VisionConstants.RED_RIGHT_VISION.BOTTOM_HEIGHT, VisionConstants.RED_RIGHT_VISION.WIDTH);
         drivetrain.setPoseEstimate(new Pose2d(startPoseX, startPoseY, Math.toRadians(startPoseHeading)));
 
     }
@@ -96,13 +96,13 @@ public class BlueLeft extends MatchOpMode {
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
                     put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
-                            new BlueLeftFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ONE, new SequentialCommandGroup(
-                            new BlueLeftOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightOneCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                     put(RingPipelineEx.Stack.ZERO, new SequentialCommandGroup(
-                            new BlueLeftZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
+                            new RedRightZeroCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
                 }}, vision::getCurrentStack).andThen(new InstantCommand(() -> stop()))
         );

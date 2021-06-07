@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inperson.blue.right;
+package org.firstinspires.ftc.teamcode.auton.blue.right;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -20,7 +20,7 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
-                new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
+                new org.firstinspires.ftc.teamcode.auton.blue.right.BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, -45),
                 new TurnToCommand(drivetrain, -225),
