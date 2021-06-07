@@ -26,11 +26,17 @@ public class BlueRightZeroCommand extends SequentialCommandGroup {
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 //Place Wobble Goal
+                new DriveForwardCommand(drivetrain, 50),
+                new TurnToCommand(drivetrain,90, true),
+                new DriveForwardCommand(drivetrain, -35),
+                new TurnToCommand(drivetrain, 0),
                 new DriveForwardCommand(drivetrain, -15),
-                new TurnCommand(drivetrain,90),
-                new DriveForwardCommand(drivetrain, 5),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -3)
+                new DriveForwardCommand(drivetrain, 10),
+                new TurnToCommand(drivetrain, 90, true),
+                new DriveForwardCommand(drivetrain, 40),
+                new TurnToCommand(drivetrain, 0),
+                new DriveForwardCommand(drivetrain, -30)
                 );
     }
 }

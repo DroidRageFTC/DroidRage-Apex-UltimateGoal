@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
@@ -21,12 +22,13 @@ public class BlueLeftOneCommand extends SequentialCommandGroup {
         addCommands(
                 new org.firstinspires.ftc.teamcode.auton.blue.left.BlueLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -35),
+                new DriveForwardCommand(drivetrain, 35),
                 new TurnToCommand(drivetrain, -90, true),
-                new DriveForwardCommand(drivetrain, -10),
+                new DriveForwardCommand(drivetrain, -8),
                 new PlaceWobbleGoal(wobbleGoalArm),
+                new DriveForwardCommand(drivetrain, 8),
                 new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, 20)
+                new DriveForwardCommand(drivetrain, -20)
                 );
     }
 }

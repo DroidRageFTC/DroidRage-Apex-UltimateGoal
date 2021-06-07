@@ -22,13 +22,12 @@ public class BlueLeftFourCommand extends SequentialCommandGroup {
         addCommands(
                 new org.firstinspires.ftc.teamcode.auton.blue.left.BlueLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -45),
-                new TurnToCommand(drivetrain, -225),
+                new DriveForwardCommand(drivetrain, 45),
+                new TurnToCommand(drivetrain, -45, true),
                 new DriveForwardCommand(drivetrain, 10),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new TurnCommand(drivetrain, 45),
+                new TurnToCommand(drivetrain, 0, true),
                 new DriveForwardCommand(drivetrain, -40)
-
                 );
     }
 }

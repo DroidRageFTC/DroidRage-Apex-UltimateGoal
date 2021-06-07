@@ -17,13 +17,13 @@ public class TurnToCommand extends CommandBase {
     Telemetry tl;
     public TurnToCommand(Drivetrain drive, double angle) {
         this.drive = drive;
-        this.angle = angle;
+        this.angle = -angle;
         addRequirements(drive);
     }
 
     public TurnToCommand(Drivetrain drive, double angle, boolean weird) {
         this.drive = drive;
-        this.angle = angle;
+        this.angle = -angle;
         this.weird = weird;
         addRequirements(drive);
     }

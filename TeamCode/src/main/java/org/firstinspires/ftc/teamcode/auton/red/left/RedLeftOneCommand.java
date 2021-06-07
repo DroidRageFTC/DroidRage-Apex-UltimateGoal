@@ -21,12 +21,12 @@ public class RedLeftOneCommand extends SequentialCommandGroup {
         addCommands(
                 new org.firstinspires.ftc.teamcode.auton.red.left.RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -35),
+                new DriveForwardCommand(drivetrain, 35),
                 new TurnToCommand(drivetrain, -90, true),
-                new DriveForwardCommand(drivetrain, -10),
                 new PlaceWobbleGoal(wobbleGoalArm),
+                new DriveForwardCommand(drivetrain, 10),
                 new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, 20)
+                new DriveForwardCommand(drivetrain, -20)
                 );
     }
 }

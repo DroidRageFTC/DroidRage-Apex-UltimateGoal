@@ -25,12 +25,11 @@ public class RedRightZeroCommand extends SequentialCommandGroup {
                 new org.firstinspires.ftc.teamcode.auton.red.right.RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 //Place Wobble Goal
-                new TurnToCommand(drivetrain, 0),
-                new DriveForwardCommand(drivetrain, -15),
-                new TurnCommand(drivetrain,90),
-                new DriveForwardCommand(drivetrain, -5),
+                new DriveForwardCommand(drivetrain, 15),
+                new TurnCommand(drivetrain,-90),
+                new DriveForwardCommand(drivetrain, 5),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -3)
+                new DriveForwardCommand(drivetrain, -5)
                 );
     }
 }

@@ -11,7 +11,7 @@ public class TurnCommand extends CommandBase {
 
     public TurnCommand(Drivetrain drive, double angle) {
         this.drive = drive;
-        this.angle = angle;
+        this.angle = -angle;
 
         addRequirements(drive);
     }

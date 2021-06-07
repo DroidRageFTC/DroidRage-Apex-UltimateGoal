@@ -22,13 +22,13 @@ public class RedRightOneCommand extends SequentialCommandGroup {
         addCommands(
                 new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, -35),
-                new TurnToCommand(drivetrain, -90, true),
+                new DriveForwardCommand(drivetrain, 35),
+                new TurnToCommand(drivetrain, 90, true),
                 new DriveForwardCommand(drivetrain, -8),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -4),
-                new TurnCommand(drivetrain, 90),
-                new DriveForwardCommand(drivetrain, 20)
+                new DriveForwardCommand(drivetrain, 8),
+                new TurnToCommand(drivetrain, 0, true),
+                new DriveForwardCommand(drivetrain, -20)
 
                 );
     }

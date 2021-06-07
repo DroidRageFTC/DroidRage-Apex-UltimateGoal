@@ -22,14 +22,14 @@ public class DriveForwardCommand extends CommandBase{
     MinVelocityConstraint constraint;
     public DriveForwardCommand(Drivetrain drive, double distance) {
         this.drive = drive;
-        this.distance = distance;
+        this.distance = -distance;
         constraint = Trajectories.velConstraint;
         this.addRequirements(drive);
     }
 
     public DriveForwardCommand(Drivetrain drive, double distance, MinVelocityConstraint constraint) {
         this.drive = drive;
-        this.distance = distance;
+        this.distance = -distance;
         this.constraint = constraint;
         this.addRequirements(drive);
     }
