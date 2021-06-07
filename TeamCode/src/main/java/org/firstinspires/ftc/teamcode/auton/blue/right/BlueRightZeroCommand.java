@@ -6,6 +6,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auton.blue.right.BlueRightShootingSequence;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.TurnCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
@@ -25,17 +26,11 @@ public class BlueRightZeroCommand extends SequentialCommandGroup {
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 //Place Wobble Goal
-                new DriveForwardCommand(drivetrain, -50),
-                new TurnToCommand(drivetrain,90, true),
-                new DriveForwardCommand(drivetrain, 35),
-                new TurnToCommand(drivetrain, 0),
-                new DriveForwardCommand(drivetrain, 15),
+                new DriveForwardCommand(drivetrain, -15),
+                new TurnCommand(drivetrain,90),
+                new DriveForwardCommand(drivetrain, -5),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, -10),
-                new TurnToCommand(drivetrain, 90, true),
-                new DriveForwardCommand(drivetrain, -40),
-                new TurnToCommand(drivetrain, 0),
-                new DriveForwardCommand(drivetrain, 30)
+                new DriveForwardCommand(drivetrain, -3)
                 );
     }
 }
