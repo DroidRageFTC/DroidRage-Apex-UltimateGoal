@@ -14,22 +14,26 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import org.firstinspires.ftc.teamcode.auton.values.outside.OutsideZeroValues;
+
 public class RedRightZeroCommand extends SequentialCommandGroup {
     public RedRightZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3800;
         final int POWERSHOT_SPEED = 3000;
+
+        OutsideZeroValues distance = new OutsideZeroValues();
+        OutsideZeroValues angle = new OutsideZeroValues();
 
         addCommands(
                 
                 
                 new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
-                //Place Wobble Goal
-                new DriveForwardCommand(drivetrain, 8),
-                new TurnCommand(drivetrain,-90),
-                new DriveForwardCommand(drivetrain, 8),
+                new DriveForwardCommand(drivetrain, distance.distanceOne),
+                new TurnCommand(drivetrain, angle.angleOne),
+                new DriveForwardCommand(drivetrain, distance.distanceTwo),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, 5)
+                new DriveForwardCommand(drivetrain, distance.distanceThree)
                 );
     }
 }

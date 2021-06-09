@@ -46,6 +46,10 @@ public class WobbleGoalArm extends SubsystemBase {
         arm.setPosition(0.28);
     }
 
+    public void autoArm() {
+        arm.setPosition(0.003);
+    }
+
     public void openClaw() {
         leftClaw.setPosition(0.58);
         rightClaw.setPosition(0.1);

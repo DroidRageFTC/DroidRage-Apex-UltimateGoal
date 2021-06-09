@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 @Config
-public class DriveForwardCommand extends CommandBase{
+public class                                                  DriveForwardCommand extends CommandBase{
 
     Drivetrain drive;
     double distance;

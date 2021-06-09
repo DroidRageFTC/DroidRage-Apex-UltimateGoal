@@ -14,10 +14,15 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import org.firstinspires.ftc.teamcode.auton.values.inside.InsideZeroValues;
+
 public class BlueRightZeroCommand extends SequentialCommandGroup {
     public BlueRightZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
+
+        InsideZeroValues distance = new InsideZeroValues();
+        InsideZeroValues angle = new InsideZeroValues();
 
         addCommands(
                 
@@ -25,17 +30,17 @@ public class BlueRightZeroCommand extends SequentialCommandGroup {
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 //Place Wobble Goal
-                new DriveForwardCommand(drivetrain, 50),
-                new TurnToCommand(drivetrain,90),
-                new DriveForwardCommand(drivetrain, -35),
-                new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, -12),
+                new DriveForwardCommand(drivetrain, distance.distanceOne),
+                new TurnToCommand(drivetrain, -angle.angleOne, true),
+                new DriveForwardCommand(drivetrain, angle.distanceTwo),
+                new TurnToCommand(drivetrain, angle.angleTwo),
+                new DriveForwardCommand(drivetrain, distance.distanceThree),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, 10),
-                new TurnToCommand(drivetrain, 90),
-                new DriveForwardCommand(drivetrain, 45),
-                new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, -36)
+                new DriveForwardCommand(drivetrain, distance.distanceFour),
+                new TurnToCommand(drivetrain, -angle.angleThree, true),
+                new DriveForwardCommand(drivetrain, distance.distanceFive),
+                new TurnToCommand(drivetrain, angle.angleFour),
+                new DriveForwardCommand(drivetrain, distance.distanceSix)
                 );
     }
 }
