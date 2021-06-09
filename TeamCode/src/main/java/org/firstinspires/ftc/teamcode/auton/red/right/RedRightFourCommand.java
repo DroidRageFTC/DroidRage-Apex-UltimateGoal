@@ -16,15 +16,15 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 public class RedRightFourCommand extends SequentialCommandGroup {
     public RedRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
-        final int HG_SPEED = 3800;
+        final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
                 new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, 45),
-                new TurnToCommand(drivetrain, 45, true),
-                new DriveForwardCommand(drivetrain, 10),
+                new TurnToCommand(drivetrain, 225, true),
+                new DriveForwardCommand(drivetrain, -10),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new TurnToCommand(drivetrain, 0, true),
                 new DriveForwardCommand(drivetrain, -40)

@@ -46,7 +46,7 @@ public class Teleop extends MatchOpMode {
 
 
     private Button intakeButton, outtakeButton;
-    private Button slowModeTrigger, tripleFeedButton, singleFeedButton, shootButton, powershotButton, toggleClawButton, liftArmButton, lowerArmButton;
+    private Button slowModeTrigger, tripleFeedButton, singleFeedButton, shootButton, powershotButton, toggleClawButton, liftArmButton, lowerArmButton, dropArmButton;
     private Button lowMidWobbleButton;
     private Button autoPowershotButton;
     private Button increaseSpeedButton;
@@ -111,7 +111,7 @@ public class Teleop extends MatchOpMode {
 
         liftArmButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_UP)).whenPressed(wobbleGoalArm::liftArm);
         lowerArmButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.DPAD_DOWN)).whenPressed(wobbleGoalArm::lowerArm);
-
+        dropArmButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.A)).whenPressed(wobbleGoalArm::dropArm);
 
         (new GamepadButton(operatorGamepad, GamepadKeys.Button.B)).whenPressed(() -> shooterWheels.adjustShooterRPM(75));
         (new GamepadButton(operatorGamepad, GamepadKeys.Button.X)).whenPressed(() -> shooterWheels.adjustShooterRPM(-75));

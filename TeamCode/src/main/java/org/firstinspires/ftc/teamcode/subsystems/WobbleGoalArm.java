@@ -27,7 +27,7 @@ public class WobbleGoalArm extends SubsystemBase {
 
 
     public WobbleGoalArm(HardwareMap hw, Telemetry tl) {
-        arm = new SimpleServo(hw, "arm", 0, 360);
+        arm = new SimpleServo(hw, "arm", 0, 180);
         leftClaw = new SimpleServo(hw, "leftClaw", 0, 180);
         rightClaw = new SimpleServo(hw, "rightClaw", 0, 180);
 
@@ -35,20 +35,24 @@ public class WobbleGoalArm extends SubsystemBase {
     }
 
     public void liftArm() {
-        arm.setPosition(0);
+        arm.setPosition(0.10);
     }
 
     public void lowerArm() {
-        arm.setPosition(0);
+        arm.setPosition(0.6);
+    }
+
+    public void dropArm() {
+        arm.setPosition(0.28);
     }
 
     public void openClaw() {
-        leftClaw.setPosition(0);
-        rightClaw.setPosition(0);
+        leftClaw.setPosition(0.58);
+        rightClaw.setPosition(0.1);
     }
     public void closeClaw() {
-        leftClaw.setPosition(0);
-        rightClaw.setPosition(0);
+        leftClaw.setPosition(0.1);
+        rightClaw.setPosition(0.58);
     }
 
 }

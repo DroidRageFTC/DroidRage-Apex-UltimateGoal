@@ -24,9 +24,9 @@ public class BlueLeftOneCommand extends SequentialCommandGroup {
 
                 new DriveForwardCommand(drivetrain, 35),
                 new TurnToCommand(drivetrain, -90, true),
-                new DriveForwardCommand(drivetrain, -8),
+                new DriveForwardCommand(drivetrain, 10),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, 8),
+                new DriveForwardCommand(drivetrain, 5),
                 new TurnToCommand(drivetrain, 0, true),
                 new DriveForwardCommand(drivetrain, -20)
                 );

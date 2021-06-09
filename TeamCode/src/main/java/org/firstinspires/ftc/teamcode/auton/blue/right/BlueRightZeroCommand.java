@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 public class BlueRightZeroCommand extends SequentialCommandGroup {
     public BlueRightZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
-        final int HG_SPEED = 360;
+        final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(
@@ -27,16 +27,16 @@ public class BlueRightZeroCommand extends SequentialCommandGroup {
 
                 //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, 50),
-                new TurnToCommand(drivetrain,90, true),
+                new TurnToCommand(drivetrain,90),
                 new DriveForwardCommand(drivetrain, -35),
-                new TurnToCommand(drivetrain, 0),
-                new DriveForwardCommand(drivetrain, -15),
+                new TurnToCommand(drivetrain, 0, true),
+                new DriveForwardCommand(drivetrain, -12),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, 10),
-                new TurnToCommand(drivetrain, 90, true),
-                new DriveForwardCommand(drivetrain, 40),
-                new TurnToCommand(drivetrain, 0),
-                new DriveForwardCommand(drivetrain, -30)
+                new TurnToCommand(drivetrain, 90),
+                new DriveForwardCommand(drivetrain, 45),
+                new TurnToCommand(drivetrain, 0, true),
+                new DriveForwardCommand(drivetrain, -36)
                 );
     }
 }

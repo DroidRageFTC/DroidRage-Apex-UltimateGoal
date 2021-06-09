@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 
 public class RedRightShootingSequence extends SequentialCommandGroup {
     public RedRightShootingSequence(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder) {
-        final int HG_SPEED = 3800;
+        final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
         addCommands(

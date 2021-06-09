@@ -24,7 +24,7 @@ public class BlueRightShootingSequence extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
                 new DriveForwardCommand(drivetrain, 60),
-                new TurnToCommand(drivetrain, -10, true),
+                new TurnToCommand(drivetrain, -12, true),
 
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 5, 100),
