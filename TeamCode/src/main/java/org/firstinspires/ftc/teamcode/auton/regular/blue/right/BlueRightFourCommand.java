@@ -14,21 +14,26 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import org.firstinspires.ftc.teamcode.auton.values.inside.InsideFourValues;
+
 public class BlueRightFourCommand extends SequentialCommandGroup {
     public BlueRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
+        InsideFourValues distance = new InsideFourValues();
+        InsideFourValues angle = new InsideFourValues();
+
         addCommands(
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
-                new DriveForwardCommand(drivetrain, 60),
-                new TurnToCommand(drivetrain, 90, true),
-                new DriveForwardCommand(drivetrain, -15),
+                new DriveForwardCommand(drivetrain, distance.distanceOne),
+                new TurnToCommand(drivetrain, -angle.angleOne, true),
+                new DriveForwardCommand(drivetrain, distance.distanceTwo),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, 27),
-                new TurnToCommand(drivetrain, 0, true),
-                new DriveForwardCommand(drivetrain, -40)
+                new DriveForwardCommand(drivetrain, distance.distanceThree),
+                new TurnToCommand(drivetrain, angle.angleTwo, true),
+                new DriveForwardCommand(drivetrain, distance.distanceFour)
                 );
     }
 }

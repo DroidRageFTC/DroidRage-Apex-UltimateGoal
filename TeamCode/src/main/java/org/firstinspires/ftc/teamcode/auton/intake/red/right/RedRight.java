@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
 
-@Autonomous(name = "Red Right Autonomous", group = "Red")
+@Autonomous(name = "Red Right Autonomous + Intake", group = "Red")
 public class RedRight extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
