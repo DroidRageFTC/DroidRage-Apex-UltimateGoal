@@ -14,23 +14,16 @@ import org.firstinspires.ftc.teamcode.Trajectories;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 @Config
-public class DriveForwardCommand extends CommandBase{
+public class SlowDriveForwardCommand extends CommandBase{
 
     Drivetrain drive;
     double distance;
     Trajectory trajectory;
     MinVelocityConstraint constraint;
-    public DriveForwardCommand(Drivetrain drive, double distance) {
+    public SlowDriveForwardCommand(Drivetrain drive, double distance) {
         this.drive = drive;
         this.distance = -distance;
-        constraint = Trajectories.velConstraint;
-        this.addRequirements(drive);
-    }
-
-    public DriveForwardCommand(Drivetrain drive, double distance, MinVelocityConstraint constraint) {
-        this.drive = drive;
-        this.distance = -distance;
-        this.constraint = constraint;
+        constraint = Trajectories.slowConstraint;
         this.addRequirements(drive);
     }
 

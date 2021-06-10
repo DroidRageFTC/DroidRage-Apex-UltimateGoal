@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.auton.intake.blue.right;
 
+import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.command.WaitCommand;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.teamcode.auton.values.inside.InsideFourShootValues;
 import org.firstinspires.ftc.teamcode.commands.IntakeStopCommand;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
+import org.firstinspires.ftc.teamcode.commands.drive.SlowDriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
 import org.firstinspires.ftc.teamcode.commands.IntakeStartCommand;
@@ -23,6 +25,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 import org.firstinspires.ftc.teamcode.auton.values.inside.InsideFourValues;
 
 public class BlueRightFourCommand extends SequentialCommandGroup {
+
     public BlueRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
@@ -48,12 +51,12 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
                 new InstantCommand(wobbleGoalArm::dropArm, wobbleGoalArm),
 
                 // go back and intake more rings
-                new TurnToCommand(drivetrain, 40,true),
+                new TurnToCommand(drivetrain, 35,true),
                 new IntakeStartCommand(intake),
-                new DriveForwardCommand(drivetrain, -40),
+                new SlowDriveForwardCommand(drivetrain, -20),
                 new IntakeStopCommand(intake),
-                new DriveForwardCommand(drivetrain, 40),
-                new TurnToCommand(drivetrain, -40,true),
+                new SlowDriveForwardCommand(drivetrain, 20),
+                new TurnToCommand(drivetrain, -12,true),
 
                 // shoot the rings picked up from intake
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
