@@ -43,38 +43,23 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
                 new TurnToCommand(drivetrain, -14, true),
 
                 // Shoot 3 rings
-                new FeedRingsCommand(feeder, 5, 100),
-
-                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
+                new FeedRingsCommand(feeder, 4, 100),
 
                 // lift wobble goal so it doesnt collide with intake
                 new InstantCommand(wobbleGoalArm::dropArm, wobbleGoalArm),
 
                 // go back and intake more rings
-                new TurnToCommand(drivetrain, 35,true),
+                new TurnToCommand(drivetrain, 30,true),
                 new IntakeStartCommand(intake),
                 new SlowDriveForwardCommand(drivetrain, -26),
                 new DriveForwardCommand(drivetrain, 26),
-                new IntakeStopCommand(intake),
                 new TurnToCommand(drivetrain, -14,true),
 
                 // shoot the rings picked up from intake
-                new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
-                new FeedRingsCommand(feeder, 5, 100),
+                new FeedRingsCommand(feeder, 4, 100),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
-
-                // go back and intake last ring
-                new TurnToCommand(drivetrain, 35,true),
-                new IntakeStartCommand(intake),
-                new SlowDriveForwardCommand(drivetrain, -20),
-                new DriveForwardCommand(drivetrain, 20),
                 new IntakeStopCommand(intake),
-                new TurnToCommand(drivetrain, -14,true),
 
-                // shoot the rings picked up from intake
-                new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
-                new FeedRingsCommand(feeder, 2, 40),
-                new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
 
                 //back to original position
                 new TurnToCommand(drivetrain, 0,true),

@@ -2,10 +2,11 @@ package org.firstinspires.ftc.teamcode.auton.intake.intaketestRemovable;
 
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.opmodes.MatchOpMode;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
-
+@Disabled
 @Autonomous(name = "IntakeTest", group = "Intake Auto Test")
 public class intaketest extends MatchOpMode {
     private MotorEx intakeMotor;

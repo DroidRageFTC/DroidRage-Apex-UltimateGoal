@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.commands.RunCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TrajectoryFollowerCommand;
@@ -30,6 +31,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
  * is recommended that you use the FollowerPIDTuner opmode for further fine tuning.
  */
 @Config
+@Disabled
 @Autonomous(group = "drive")
 public class BackAndForth extends MatchOpMode {
 
