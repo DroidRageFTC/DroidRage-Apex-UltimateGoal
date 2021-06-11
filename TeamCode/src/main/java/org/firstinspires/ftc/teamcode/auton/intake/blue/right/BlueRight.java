@@ -93,8 +93,11 @@ public class BlueRight extends MatchOpMode {
     public void matchStart() {
         feeder.retractFeed();
         wobbleGoalArm.closeClaw();
+
+
         schedule(
                 new SelectCommand(new HashMap<Object, Command>() {{
+
                     put(RingPipelineEx.Stack.FOUR, new SequentialCommandGroup(
                             new BlueRightFourCommand(drivetrain, shooterWheels, feeder, intake, wobbleGoalArm, vision, telemetry)
                     ));
