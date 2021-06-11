@@ -13,6 +13,7 @@ public class Intake extends SubsystemBase {
 
     public static double INTAKE_SPEED = 1;
     public static double OUTAKE_SPEED = -1;
+    public static double SLOW_INTAKE_SPEED = 0.75;
 
     Telemetry telemetry;
     private MotorEx intake;
@@ -23,6 +24,14 @@ public class Intake extends SubsystemBase {
         intake.setInverted(true);
         bintake.setInverted(true);
         this.telemetry = tl;
+    }
+    public Intake(MotorEx intake, MotorEx bintake, Telemetry tl, boolean slow) {
+        this.intake = intake;
+        this.bintake = bintake;
+        intake.setInverted(true);
+        bintake.setInverted(true);
+        this.telemetry = tl;
+        INTAKE_SPEED = slow ? Intake.SLOW_INTAKE_SPEED : INTAKE_SPEED;
     }
 
     @Override
