@@ -75,7 +75,7 @@ public class BlueRight extends MatchOpMode {
         // Subsystems
         drivetrain = new Drivetrain(new SampleTankDrive(hardwareMap), telemetry);
         drivetrain.init();
-        intake = new Intake(intakeMotor, bintakeMotor, telemetry);
+        intake = new Intake(intakeMotor, bintakeMotor, telemetry, true);
         shooterWheels = new ShooterWheels(shooterMotorFront, shooterMotorBack, telemetry);
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(hardwareMap, telemetry);
