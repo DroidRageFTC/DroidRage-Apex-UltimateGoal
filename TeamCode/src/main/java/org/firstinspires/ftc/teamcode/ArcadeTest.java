@@ -79,7 +79,8 @@ public class ArcadeTest extends MatchOpMode {
         feeder = new ShooterFeeder(feedServo, telemetry);
         wobbleGoalArm = new WobbleGoalArm(hardwareMap, telemetry);
 
-        gamepad1.setJoystickDeadzone(0.0f);
+        gamepad1.setJoystickDeadzone(0.05f);
+        gamepad2.setJoystickDeadzone(0.05f);
         driverGamepad = new GamepadEx(gamepad1);
         operatorGamepad = new GamepadEx(gamepad2);
     }
