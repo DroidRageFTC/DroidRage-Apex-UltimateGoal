@@ -8,9 +8,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Util;
 import org.firstinspires.ftc.teamcode.roadrunner.SampleTankDrive;
 
 import java.util.List;
+import java.util.logging.Level;
 
 
 public class Drivetrain extends SubsystemBase {
@@ -27,6 +29,7 @@ public class Drivetrain extends SubsystemBase {
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         drive.setMotorPowers(0, 0);
         drive.setPoseEstimate(new Pose2d());
+        drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
     @Override
     public void periodic() {
