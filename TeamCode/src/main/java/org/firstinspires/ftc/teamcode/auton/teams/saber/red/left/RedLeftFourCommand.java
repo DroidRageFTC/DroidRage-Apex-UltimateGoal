@@ -26,7 +26,7 @@ public class RedLeftFourCommand extends SequentialCommandGroup {
         InsideFourValues angle = new InsideFourValues();
 
         addCommands(
-                new WaitCommand(10000);
+                new WaitCommand(10000),
                 new RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),

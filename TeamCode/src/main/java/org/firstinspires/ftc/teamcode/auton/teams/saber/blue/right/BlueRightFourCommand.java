@@ -26,7 +26,7 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
         InsideFourValues angle = new InsideFourValues();
 
         addCommands(
-                new WaitCommand(10000);
+                new WaitCommand(10000),
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
