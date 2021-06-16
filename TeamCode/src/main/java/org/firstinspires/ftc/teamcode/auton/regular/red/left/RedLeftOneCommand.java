@@ -28,6 +28,7 @@ public class RedLeftOneCommand extends SequentialCommandGroup {
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
                 new TurnToCommand(drivetrain, angle.angleOne, true),
+                new DriveForwardCommand(drivetrain, distance.distanceTwo),
                 new PlaceWobbleGoal(wobbleGoalArm),
                 new DriveForwardCommand(drivetrain, distance.distanceThree),
                 new TurnToCommand(drivetrain, angle.angleTwo, true),
