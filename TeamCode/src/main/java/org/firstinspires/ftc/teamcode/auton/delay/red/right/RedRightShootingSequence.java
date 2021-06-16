@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.intake.blue.left;
+package org.firstinspires.ftc.teamcode.auton.delay.red.right;
 
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 
-public class BlueLeftShootingSequence extends SequentialCommandGroup {
-    public BlueLeftShootingSequence(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder) {
+public class RedRightShootingSequence extends SequentialCommandGroup {
+    public RedRightShootingSequence(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
@@ -24,14 +24,14 @@ public class BlueLeftShootingSequence extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
                 new DriveForwardCommand(drivetrain, 60),
-                new TurnToCommand(drivetrain, 12, true),
+                new TurnToCommand(drivetrain, -10, true),
 
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 5, 100),
                 
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels),
 
-                new TurnToCommand(drivetrain, 0,true)
+                new TurnToCommand(drivetrain, 0, true)
                 );
     }
 }

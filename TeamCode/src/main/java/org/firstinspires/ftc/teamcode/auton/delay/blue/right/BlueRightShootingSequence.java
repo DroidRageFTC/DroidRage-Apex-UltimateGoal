@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.intake.blue.right;
+package org.firstinspires.ftc.teamcode.auton.delay.blue.right;
 
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;

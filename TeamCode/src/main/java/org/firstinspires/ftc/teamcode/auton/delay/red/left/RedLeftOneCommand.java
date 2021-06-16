@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.intake.red.left;
+package org.firstinspires.ftc.teamcode.auton.delay.red.left;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 
@@ -13,36 +13,29 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
-import org.firstinspires.ftc.teamcode.auton.values.inside.InsideZeroValues;
+import org.firstinspires.ftc.teamcode.auton.values.inside.InsideOneValues;
 
-public class RedLeftZeroCommand extends SequentialCommandGroup {
-    public RedLeftZeroCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+public class RedLeftOneCommand extends SequentialCommandGroup {
+    public RedLeftOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
-        InsideZeroValues distance = new InsideZeroValues();
-        InsideZeroValues angle = new InsideZeroValues();
+        InsideOneValues distance = new InsideOneValues();
+        InsideOneValues angle = new InsideOneValues();
 
         addCommands(
-                
-                
                 new RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
-                //Place Wobble Goal
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
                 new TurnToCommand(drivetrain, angle.angleOne, true),
-                new DriveForwardCommand(drivetrain, angle.distanceTwo),
-                new TurnToCommand(drivetrain, angle.angleTwo),
-                new DriveForwardCommand(drivetrain, distance.distanceThree),
+                new DriveForwardCommand(drivetrain, distance.distanceTwo),
                 new PlaceWobbleGoal(wobbleGoalArm),
-                new DriveForwardCommand(drivetrain, distance.distanceFour),
-                new TurnToCommand(drivetrain, angle.angleThree, true),
-                new DriveForwardCommand(drivetrain, distance.distanceFive),
-                new TurnToCommand(drivetrain, angle.angleFour),
-                new DriveForwardCommand(drivetrain, distance.distanceSix)
+                new DriveForwardCommand(drivetrain, distance.distanceThree),
+                new TurnToCommand(drivetrain, angle.angleTwo, true),
+                new DriveForwardCommand(drivetrain, distance.distanceFour)
                 );
     }
 }
     //new SplineCommand(drivetrain, new Vector2d(-42, 12), Math.toRadians(180)),
     //new DriveForwardCommand(drivetrain, -40),
-    //new TurnToCommand(drivetrain, 170),
+    //new SplineCommand(drivetrain, new Vector2d(-30, 24), Math.toRadians(15), false),

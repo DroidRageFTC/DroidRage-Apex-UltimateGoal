@@ -1,19 +1,16 @@
-package org.firstinspires.ftc.teamcode.auton.intake.blue.right;
+package org.firstinspires.ftc.teamcode.auton.delay.blue.right;
 
-import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
-import com.arcrobotics.ftclib.command.WaitCommand;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.auton.values.inside.InsideFourShootValues;
+import org.firstinspires.ftc.teamcode.commands.IntakeStartCommand;
 import org.firstinspires.ftc.teamcode.commands.IntakeStopCommand;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
 import org.firstinspires.ftc.teamcode.commands.drive.DriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.SlowDriveForwardCommand;
 import org.firstinspires.ftc.teamcode.commands.drive.TurnToCommand;
 import org.firstinspires.ftc.teamcode.commands.shooter.FeedRingsCommand;
-import org.firstinspires.ftc.teamcode.commands.IntakeStartCommand;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterFeeder;
@@ -21,20 +18,17 @@ import org.firstinspires.ftc.teamcode.subsystems.ShooterWheels;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
+import org.firstinspires.ftc.teamcode.auton.values.inside.InsideOneValues;
 
-import org.firstinspires.ftc.teamcode.auton.values.inside.InsideFourValues;
-
-public class BlueRightFourCommand extends SequentialCommandGroup {
-
-    public BlueRightFourCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
+public class BlueRightOneCommand extends SequentialCommandGroup {
+    public BlueRightOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
         final int HG_SPEED = 3600;
         final int POWERSHOT_SPEED = 3000;
 
-        InsideFourValues distance = new InsideFourValues();
-        InsideFourValues angle = new InsideFourValues();
+        InsideOneValues distance = new InsideOneValues();
+        InsideOneValues angle = new InsideOneValues();
 
         addCommands(
-                //shoot
                 new InstantCommand(feeder::retractFeed),
 
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
@@ -63,7 +57,7 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
 
                 //back to original position
                 new TurnToCommand(drivetrain, 0,true),
-
+                
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
                 new TurnToCommand(drivetrain, -angle.angleOne, true),
                 new DriveForwardCommand(drivetrain, distance.distanceTwo),
@@ -74,6 +68,6 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
                 );
     }
 }
-    //new SplineCommand(drivetrain, new Vector2d(-30, 24), Math.toRadians(15), false)
+    //new SplineCommand(drivetrain, new Vector2d(-42, 12), Math.toRadians(180)),
     //new DriveForwardCommand(drivetrain, -40),
-    //
+    //new SplineCommand(drivetrain, new Vector2d(-30, 24), Math.toRadians(15), false),
