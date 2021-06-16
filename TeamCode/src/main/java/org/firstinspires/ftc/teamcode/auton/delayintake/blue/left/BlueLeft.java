@@ -28,7 +28,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
 @Disabled
-@Autonomous(name = "DELAYED Blue Left Autonomous + intake", group = "Intake Auto")
+@Autonomous(name = "DELAYED Blue Left Autonomous + intake", group = "Delayed Intake Auto")
 public class BlueLeft extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
