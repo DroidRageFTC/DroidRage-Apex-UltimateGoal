@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auton.delay.blue.left;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.commands.PlaceWobbleGoal;
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import org.firstinspires.ftc.teamcode.auton.values.outside.OutsideOneValues;
+import org.firstinspires.ftc.teamcode.auton.values.delay;
 
 public class BlueLeftOneCommand extends SequentialCommandGroup {
     public BlueLeftOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
@@ -23,8 +25,10 @@ public class BlueLeftOneCommand extends SequentialCommandGroup {
 
         OutsideOneValues distance = new OutsideOneValues();
         OutsideOneValues angle = new OutsideOneValues();
+        delay delay = new delay();
 
         addCommands(
+                new WaitCommand(delay.outsideOneDelay*1000),
                 new BlueLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
