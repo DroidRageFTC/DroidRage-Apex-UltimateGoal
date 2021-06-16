@@ -27,7 +27,7 @@ import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
 
-@Autonomous(name = "Red Left Autonomous", group = "delay Auto")
+@Autonomous(name = "DELAYED Red Left Autonomous", group = "Delayed Regular Auto")
 public class RedLeft extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;

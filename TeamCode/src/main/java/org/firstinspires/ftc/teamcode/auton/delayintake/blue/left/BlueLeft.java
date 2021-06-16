@@ -10,6 +10,7 @@ import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -26,8 +27,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
-
-@Autonomous(name = "Blue Left Autonomous + intake", group = "Intake Auto")
+@Disabled
+@Autonomous(name = "DELAYED Blue Left Autonomous + intake", group = "Intake Auto")
 public class BlueLeft extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
