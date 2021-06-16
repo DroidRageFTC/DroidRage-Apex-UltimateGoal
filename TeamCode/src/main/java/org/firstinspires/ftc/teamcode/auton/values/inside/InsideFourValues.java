@@ -6,7 +6,7 @@ public class InsideFourValues {
     public int angleOne = -90;
     public int distanceTwo = -15;
     // place wobble
-    public int distanceThree = 30;//change shooting to the same as red left shooting sequence
+    public int distanceThree = 30;
     public int angleTwo = 0;
     public int distanceFour = -44;
 }

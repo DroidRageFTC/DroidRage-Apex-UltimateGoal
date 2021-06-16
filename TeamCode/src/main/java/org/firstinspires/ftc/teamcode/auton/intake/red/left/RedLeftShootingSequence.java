@@ -24,7 +24,7 @@ public class RedLeftShootingSequence extends SequentialCommandGroup {
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
 
                 new DriveForwardCommand(drivetrain, 60),
-                new TurnToCommand(drivetrain, 11, true),
+                new TurnToCommand(drivetrain, 9, true),
 
                 // Shoot 3 rings
                 new FeedRingsCommand(feeder, 5, 100),
