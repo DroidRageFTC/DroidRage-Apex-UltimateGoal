@@ -31,7 +31,6 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
  * is recommended that you use the FollowerPIDTuner opmode for further fine tuning.
  */
 @Config
-@Disabled
 @Autonomous(group = "drive")
 public class BackAndForth extends MatchOpMode {
 
