@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.auton.delayintake.red.left;
 
 import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+import com.arcrobotics.ftclib.command.WaitCommand;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.auton.intake.red.left.RedLeftShootingSequence;
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import org.firstinspires.ftc.teamcode.auton.values.inside.InsideOneValues;
+import org.firstinspires.ftc.teamcode.auton.values.delay;
 
 public class RedLeftOneCommand extends SequentialCommandGroup {
     public RedLeftOneCommand(Drivetrain drivetrain, ShooterWheels shooterWheels, ShooterFeeder feeder, Intake intake, WobbleGoalArm wobbleGoalArm, Vision vision, Telemetry telemetry) {
@@ -28,8 +30,10 @@ public class RedLeftOneCommand extends SequentialCommandGroup {
 
         InsideOneValues distance = new InsideOneValues();
         InsideOneValues angle = new InsideOneValues();
+        delay delay = new delay();
 
         addCommands(
+                new WaitCommand(delay.insideOneDelay),
                 new InstantCommand(feeder::retractFeed),
 
                 new InstantCommand(() -> shooterWheels.setShooterRPM(HG_SPEED), shooterWheels),
