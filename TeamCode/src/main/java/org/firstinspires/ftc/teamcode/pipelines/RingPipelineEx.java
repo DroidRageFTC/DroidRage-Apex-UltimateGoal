@@ -13,7 +13,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
 @Config
 public class RingPipelineEx extends UGRectRingPipeline {
 
-    public static double MIN = 70;
+    public static double MIN = 60;
     public static double MAX = 105;
 
     public void setBottomRectangle(double x, double y) {
