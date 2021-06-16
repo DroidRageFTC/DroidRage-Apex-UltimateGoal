@@ -19,7 +19,7 @@ public class Trajectories {
         ));
     public static MinVelocityConstraint slowConstraint = new MinVelocityConstraint(Arrays.asList(
             new AngularVelocityConstraint(MAX_ANG_VEL),
-            new TankVelocityConstraint(7, TRACK_WIDTH)
+            new TankVelocityConstraint(6, TRACK_WIDTH)
     ));
 
 
