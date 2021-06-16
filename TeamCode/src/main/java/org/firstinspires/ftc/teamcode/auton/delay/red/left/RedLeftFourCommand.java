@@ -28,7 +28,7 @@ public class RedLeftFourCommand extends SequentialCommandGroup {
         delay delay = new delay();
 
         addCommands(
-                new WaitCommand(delay.insideFourDelay*1000),
+                new WaitCommand(delay.insideFourDelay),
                 new RedLeftShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),

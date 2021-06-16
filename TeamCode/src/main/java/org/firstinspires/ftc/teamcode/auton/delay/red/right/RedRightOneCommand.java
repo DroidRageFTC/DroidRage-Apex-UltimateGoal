@@ -29,7 +29,7 @@ public class RedRightOneCommand extends SequentialCommandGroup {
         delay delay = new delay();
 
         addCommands(
-                new WaitCommand(delay.outsideOneDelay*1000),
+                new WaitCommand(delay.outsideOneDelay),
                 new RedRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),

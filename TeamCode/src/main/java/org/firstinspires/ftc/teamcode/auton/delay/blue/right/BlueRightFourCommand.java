@@ -28,7 +28,7 @@ public class BlueRightFourCommand extends SequentialCommandGroup {
         delay delay = new delay();
 
         addCommands(
-                new WaitCommand(delay.insideFourDelay*1000),
+                new WaitCommand(delay.insideFourDelay),
                 new BlueRightShootingSequence(drivetrain, shooterWheels, feeder),
 
                 new DriveForwardCommand(drivetrain, distance.distanceOne),
