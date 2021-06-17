@@ -92,7 +92,7 @@ public class Teleop extends MatchOpMode {
 
         singleFeedButton = (new GamepadButton(driverGamepad, GamepadKeys.Button.A)).whenPressed(new FeedRingsCommand(feeder, 1));
         // TRIPLE SHOT SPEED *********************
-        tripleFeedButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.LEFT_BUMPER)).whenPressed(new FeedRingsCommand(feeder, 5, 50));
+        tripleFeedButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.LEFT_BUMPER)).whenPressed(new FeedRingsCommand(feeder, 5, 55));
         shootButton = (new GamepadButton(operatorGamepad, GamepadKeys.Button.RIGHT_BUMPER)).toggleWhenPressed(
                 new InstantCommand(() -> shooterWheels.setShooterRPM(ShooterWheels.TARGET_SPEED), shooterWheels),
                 new InstantCommand(() -> shooterWheels.setShooterRPM(0), shooterWheels));
