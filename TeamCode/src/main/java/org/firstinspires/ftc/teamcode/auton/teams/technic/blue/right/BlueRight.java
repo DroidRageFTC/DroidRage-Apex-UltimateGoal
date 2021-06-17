@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auton.teams.saber.blue.right;
+package org.firstinspires.ftc.teamcode.auton.teams.technic.blue.right;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.arcrobotics.ftclib.command.Command;
@@ -10,7 +10,6 @@ import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.TouchSensor;
@@ -27,8 +26,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.subsystems.WobbleGoalArm;
 
 import java.util.HashMap;
-@Disabled
-@Autonomous(name = "saber Blue Right Autonomous", group = "saber")
+
+@Autonomous(name = "8565 technic blue right", group = "technic")
 public class BlueRight extends MatchOpMode {
     public static double startPoseX = -62.5;
     public static double startPoseY = 0;
