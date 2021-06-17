@@ -147,6 +147,8 @@ lower claw = dpad down
 raise shooter speed = operator B
 lower shooter speed = operator X
 
+theres probably more this is out of date
+
 
 */
 
