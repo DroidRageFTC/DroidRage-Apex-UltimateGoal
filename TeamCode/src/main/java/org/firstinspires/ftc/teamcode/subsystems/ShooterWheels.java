@@ -27,7 +27,7 @@ public class ShooterWheels extends SubsystemBase {
 
     public static double SHOOTER_TPR = 34.5;
 
-    public static double SHOOTER_P = 0.004;
+    public static double SHOOTER_P = 0.005;
     public static double SHOOTER_F = 0.00021;
 
     // *************************************************** TELEOP SPEED *************** /
