@@ -10,7 +10,7 @@ public class InsideZeroValues {
     //place wobble
     public int distanceFour = 10;
     public int angleThree = -90;
-    public int distanceFive = 50;
+    public int distanceFive = 48;
     public int angleFour = 0;
     public int distanceSix = -34;
 }
